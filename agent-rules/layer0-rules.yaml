@@ -1,0 +1,61 @@
+version: 1.0
+
+slug_format:
+  pattern: "/{city}/{subtype}/{keyword}"
+  lowercase: true
+  separator: "-"
+
+seo_fields:
+  required:
+    - title
+    - meta_description
+    - h1
+    - canonical_url
+
+page_sections:
+  conference:
+    - hero
+    - overview
+    - agenda
+    - speakers
+    - venue
+    - registration
+    - sponsors
+    - faqs
+
+  concert:
+    - hero
+    - lineup
+    - venue
+    - tickets
+    - parking
+    - faqs
+
+  wedding:
+    - hero
+    - couple_story
+    - schedule
+    - venue
+    - accommodation
+    - rsvp
+    - faqs
+
+  corporate:
+    - hero
+    - overview
+    - agenda
+    - speakers
+    - networking
+    - venue
+    - registration
+    - faqs
+
+image_rules:
+  filename_format: "{city}-{subtype}-{keyword}-{index}.jpg"
+  alt_text_format: "{Keyword} in {City} – {Section}"
+
+linking_rules:
+  homepage_to_city_pages: true
+  city_to_subtype_pages: true
+  subtype_to_event_pages: true
+  minimum_internal_links: 3

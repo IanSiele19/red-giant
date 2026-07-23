@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Nairobi AI Summit 2026",
+    "city": "Nairobi",
+    "subtype": "conference",
+    "keyword": "ai-summit"
+  },
+  {
+    "name": "East Africa Fintech Forum",
+    "city": "Nairobi",
+    "subtype": "corporate",
+    "keyword": "fintech-forum"
+  },
+  {
+    "name": "Sauti Sol Live",
+    "city": "Nairobi",
+    "subtype": "concert",
+    "keyword": "sauti-sol-live"
+  },
+  {
+    "name": "Blankets & Wine 2026",
+    "city": "Nairobi",
+    "subtype": "concert",
+    "keyword": "blankets-wine"
+  },
+  {
+    "name": "Ian & Chantal Wedding",
+    "city": "Nakuru",
+    "subtype": "wedding",
+    "keyword": "ian-chantal-wedding"
+  },
+  {
+    "name": "Mombasa Beach Wedding Expo",
+    "city": "Mombasa",
+    "subtype": "wedding",
+    "keyword": "beach-wedding-expo"
+  },
+  {
+    "name": "Kenya Health Innovation Conference",
+    "city": "Kisumu",
+    "subtype": "conference",
+    "keyword": "health-innovation"
+  },
+  {
+    "name": "Corporate Leadership Retreat",
+    "city": "Naivasha",
+    "subtype": "corporate",
+    "keyword": "leadership-retreat"
+  }
+]
