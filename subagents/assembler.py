@@ -1,189 +1,228 @@
 class PageAssembler:
     def assemble(self, content, image, links):
 
-        breadcrumb_html = ' / '.join(
-            [f'<a href="{b["url"]}">{b["label"]}</a>' for b in links['breadcrumbs']]
+        breadcrumb_html = " / ".join(
+            [f'<a href="{b["url"]}" class="text-white text-decoration-none">{b["label"]}</a>' for b in links["breadcrumbs"]]
         )
 
-        related_html = ''.join(
-            [f'<li><a href="{r["slug"]}">{r["name"]}</a></li>' for r in links['related_links']]
+        related_html = "".join(
+            [
+                f'<a class="list-group-item list-group-item-action" href="{r["slug"]}">{r["name"]}</a>'
+                for r in links["related_links"]
+            ]
         )
 
-        return f'''
+        return f"""
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>{content['seo']['title']}</title>
-  <meta name="description" content="{content['seo']['meta_description']}">
-  <link rel="canonical" href="{content['seo']['canonical_url']}">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <style>
-    * {{
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }}
+<title>{content['seo']['title']}</title>
 
-    body {{
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #f5f7fb;
-      color: #1f2937;
-      line-height: 1.7;
-    }}
+<meta name="description" content="{content['seo']['meta_description']}">
 
-    .container {{
-      width: 90%;
-      max-width: 1100px;
-      margin: auto;
-      padding: 2rem 0;
-    }}
+<link rel="canonical" href="{content['seo']['canonical_url']}">
 
-    nav {{
-      background: #ffffff;
-      padding: 1rem 2rem;
-      border-bottom: 1px solid #e5e7eb;
-      font-size: 0.95rem;
-    }}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    nav a {{
-      color: #2563eb;
-      text-decoration: none;
-      font-weight: 500;
-    }}
+<style>
 
-    .hero {{
-      background: linear-gradient(135deg, #2563eb, #1e40af);
-      color: white;
-      padding: 4rem 2rem;
-      border-radius: 20px;
-      margin: 2rem 0;
-      text-align: center;
-      box-shadow: 0 10px 30px rgba(37, 99, 235, 0.25);
-    }}
+body{{
+    font-family:'Segoe UI',sans-serif;
+    background:#f5f7fb;
+    color:#1f2937;
+}}
 
-    .hero h1 {{
-      font-size: 2.8rem;
-      margin-bottom: 1rem;
-    }}
+.navbar{{
+    box-shadow:0 3px 15px rgba(0,0,0,.08);
+}}
 
-    .hero p {{
-      font-size: 1.1rem;
-      opacity: 0.95;
-    }}
+.hero{{
+    background:linear-gradient(135deg,#2563eb,#1d4ed8,#4338ca);
+    color:white;
+    border-radius:20px;
+    padding:70px 40px;
+    text-align:center;
+    margin:40px auto;
+}}
 
-    .hero img {{
-      width: 100%;
-      max-height: 500px;
-      object-fit: cover;
-      border-radius: 16px;
-      margin-top: 2rem;
-      border: 4px solid rgba(255,255,255,0.2);
-    }}
+.hero h1{{
+    font-size:3rem;
+    font-weight:700;
+}}
 
-    section {{
-      background: #ffffff;
-      margin: 1.5rem 0;
-      padding: 2rem;
-      border-radius: 18px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
-      border: 1px solid #eef2f7;
-    }}
+.hero p{{
+    font-size:1.2rem;
+    opacity:.95;
+}}
 
-    section h2 {{
-      color: #111827;
-      margin-bottom: 1rem;
-      font-size: 1.5rem;
-      border-left: 5px solid #2563eb;
-      padding-left: 0.8rem;
-    }}
+.hero img{{
+    margin-top:30px;
+    border-radius:18px;
+    width:100%;
+    max-height:500px;
+    object-fit:cover;
+    box-shadow:0 10px 30px rgba(0,0,0,.2);
+}}
 
-    #related-events ul {{
-      list-style: none;
-      padding-left: 0;
-    }}
+section{{
+    background:white;
+    padding:35px;
+    margin:30px 0;
+    border-radius:18px;
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+}}
 
-    #related-events li {{
-      margin: 0.7rem 0;
-      padding: 0.8rem 1rem;
-      background: #f8fafc;
-      border-radius: 10px;
-      border: 1px solid #e5e7eb;
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
-    }}
+section h2{{
+    color:#2563eb;
+    margin-bottom:20px;
+}}
 
-    #related-events li:hover {{
-      transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(0,0,0,0.08);
-    }}
+.list-group-item{{
+    border:none;
+    margin-bottom:10px;
+    border-radius:10px!important;
+}}
 
-    a {{
-      color: #2563eb;
-      text-decoration: none;
-      font-weight: 500;
-    }}
+.list-group-item:hover{{
+    background:#2563eb;
+    color:white;
+}}
 
-    a:hover {{
-      text-decoration: underline;
-    }}
+footer{{
+    background:#111827;
+    color:white;
+    text-align:center;
+    padding:40px;
+    margin-top:60px;
+}}
 
-    footer {{
-      background: #0f172a;
-      color: #e5e7eb;
-      text-align: center;
-      padding: 2rem;
-      margin-top: 3rem;
-    }}
+footer a{{
+    color:#93c5fd;
+    text-decoration:none;
+    margin:0 12px;
+}}
 
-    footer a {{
-      color: #93c5fd;
-      margin: 0 0.6rem;
-    }}
+@keyframes fadeUp{{
+from{{
+opacity:0;
+transform:translateY(25px);
+}}
+to{{
+opacity:1;
+transform:translateY(0);
+}}
+}}
 
-    @media (max-width: 768px) {{
-      .hero h1 {{
-        font-size: 2rem;
-      }}
+.hero,
+section{{
+animation:fadeUp .7s ease;
+}}
 
-      section {{
-        padding: 1.4rem;
-      }}
-    }}
-  </style>
+</style>
+
 </head>
 
 <body>
 
-  <nav>{breadcrumb_html}</nav>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
-  <div class="container">
+<div class="container">
 
-    <div class="hero">
-      <h1>{content['seo']['h1']}</h1>
-      <p>{content['seo']['meta_description']}</p>
+<a class="navbar-brand fw-bold" href="index.html">
+Red Giant Events
+</a>
 
-      <img src="{image['selected_image']}" alt="{image['alt_text']}">
-    </div>
+<div class="ms-auto">
 
-    {content['html']}
+{breadcrumb_html}
 
-    <section id="related-events">
-      <h2>Related Events</h2>
-      <ul>{related_html}</ul>
-    </section>
+</div>
 
-  </div>
+</div>
 
-  <footer>
-    <p>&copy; 2026 Event Pipeline Prototype</p>
-    <div style="margin-top: 0.5rem;">
-      <a href="/events">All Events</a>
-      <a href="/contact">Contact</a>
-    </div>
-  </footer>
+</nav>
+
+<div class="container">
+
+<div class="hero">
+
+<h1>{content['seo']['h1']}</h1>
+
+<p class="lead">
+{content['seo']['meta_description']}
+</p>
+
+<div class="mt-4 mb-4">
+
+<a href="#registration" class="btn btn-light btn-lg px-5">
+
+Register Now
+
+</a>
+
+</div>
+
+<img
+src="{image['selected_image']}"
+alt="{image['alt_text']}"
+class="img-fluid">
+
+</div>
+
+{content['html']}
+
+<section id="related-events">
+
+<h2>Related Events</h2>
+
+<div class="list-group">
+
+{related_html}
+
+</div>
+
+</section>
+
+</div>
+
+<footer>
+
+<p class="mb-2">
+© 2026 Event Pipeline Prototype
+</p>
+
+<p>
+
+Generated using a multi-agent orchestration pipeline.
+
+</p>
+
+<div class="mt-3">
+
+<a href="index.html">
+Home
+</a>
+
+<a href="#">
+Events
+</a>
+
+<a href="#">
+Contact
+</a>
+
+</div>
+
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
+
 </html>
-'''
+"""
